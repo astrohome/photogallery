@@ -157,7 +157,7 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>javax.enterprise</groupId>
+                <groupId>javax.entreprise</groupId>
                 <artifactId>cdi-api</artifactId>
                 <version>1.2</version>
                 <scope>provided</scope>
