@@ -1,0 +1,66 @@
+#################### JDBC Configuration ##########################
+#jdbc.driverClassName:${jdbc.driverClassName}
+#jdbc.url:${jdbc.url}
+#jdbc.username:${jdbc.username}
+#jdbc.password:${jdbc.password}
+#
+#################### Hibernate Configuration ##########################
+#hibernate.dialect:${hibernate.dialect}
+#hibernate.show_sql:${hibernate.show_sql}
+#hibernate.hbm2ddl.auto:${hibernate.hbm2ddl.auto}
+#hibernate.generate_statistics:${hibernate.generate_statistics}
+#
+#gallery.delta:${gallery.delta}
+#
+#scan.directory:${scan.directory}
+#scan.extention:${scan.extension}
+#thumbs.directory:${thumbs.directory}
+#thumbs.strategy:${thumbs.strategy}
+#thumbs.watermark:${thumbs.watermark}
+#download.temp:${download.temp}
+#
+#mail.smtp.server:${mail.smtp.server}
+#mail.smtp.user:${mail.smtp.user}
+#mail.smtp.password:${mail.smtp.password}
+#mail.smtp.port:${mail.smtp.port}
+#mail.activation.from:${mail.activation.from}
+#mail.activation.subject:Активация аккаунта.
+
+
+
+################### JDBC Configuration ##########################
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/photogallery
+  username: photogallery
+  password: photogallery
+
+################### Hibernate Configuration ##########################
+hibernate:
+  dialect: org.hibernate.dialect.MySQLDialect
+  show_sql: true
+  hbm2ddl:
+    auto: update
+  generate_statistics: true
+
+gallery:
+  delta: 12
+
+file:
+  scan:
+    directory: D:/печать
+    extension: jpg
+  thumbs:
+    directory: /home/felix/thumbs
+    strategy: MD5
+    watermark: /home/felix/water.png
+  download:
+    temp: /tmp
+
+mail:
+  smtp:
+    server: smtp.gmail.com
+    user: test@gmail.com
+    port: 587
+  activation:
+    from: activation@georg.com.ua

@@ -15,26 +15,11 @@ import java.util.Set;
 @Component
 public class FileUtils {
 
-    DirectoryStream.Filter<Path> imagesFilter = new DirectoryStream.Filter<Path>() {
-        @Override
-        public boolean accept(Path file) throws IOException {
-            final PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**/*." + extension);
-            return (!Files.isDirectory(file) && matcher.matches(file));
-        }
-    };
-//    DirectoryStream.Filter<Path> directoryFilter = new DirectoryStream.Filter<Path>() {
-//        @Override
-//        public boolean accept(Path file) throws IOException {
-//            if (Files.isDirectory(file)) {
-//                return (findImages(file.getFileName().toString()).size() > 0);
-//            }
-//            return false;
-//        }
-//    };
+    final PathMatcher matcher;
 
     @Value("${file.scan.directory}")
     private String galleriesPath;
-    @Value("${file.scan.extension}")
+    @Value("${file.scan.extension:.jpg}")
     private String extension;
     @Value("${file.thumbs.directory}")
     private String thumbsPath;
@@ -48,21 +33,33 @@ public class FileUtils {
     @Log
     private Logger logger;
 
-    public Set<String> searchGalleries() {
+    public FileUtils() {
+        matcher = FileSystems.getDefault().getPathMatcher("glob:**/*." + extension);
+    }
+
+    public Set<Path> searchGalleries() {
         Set<Path> dirs = new HashSet<>();
-        searchDirectories(dirs, Paths.get(galleriesPath));
-        return null;
+        searchDirectories(dirs, Paths.get(galleriesPath).toAbsolutePath());
+        return dirs;
+//        return dirs.parallelStream().filter(path -> {
+//            final boolean[] hasImages = {false};
+//            path.forEach(file -> {
+//                if (!Files.isDirectory(file) && matcher.matches(file)) {
+//                    hasImages[0] = true;
+//                }
+//            });
+//            return hasImages[0];
+//        }).collect(Collectors.toSet());
     }
 
     private void searchDirectories(Set<Path> galleries, Path start) {
-        try {
-            Files.newDirectoryStream(start).forEach(x -> x.forEach(path -> {
-                if (Files.isDirectory(path)) {
-                    searchDirectories(galleries, path);
-                } else {
-                    galleries.add(path);
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(start)) {
+            for (Path entry : stream) {
+                if (Files.isDirectory(entry)) {
+                    searchDirectories(galleries, entry);
+                    galleries.add(entry);
                 }
-            }));
+            }
         } catch (IOException e) {
             logger.error(e);
         }
