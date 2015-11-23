@@ -20,7 +20,7 @@
                 var progresspump = setInterval(function () {
                     /* query the completion percentage from the server */
                     $.get("/getProgress", function (data) {
-                        /* update the progress bar width */
+                        /* save the progress bar width */
                         $("#progressbar").progressbar({
                             value: data / total * 100
                         });

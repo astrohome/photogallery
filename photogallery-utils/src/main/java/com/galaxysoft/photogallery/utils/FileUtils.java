@@ -1,6 +1,6 @@
 package com.galaxysoft.photogallery.utils;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -61,7 +61,7 @@ public class FileUtils {
                 }
             }
         } catch (IOException e) {
-            logger.error(e);
+            logger.error("Error during search directories", e);
         }
     }
 

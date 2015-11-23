@@ -1,7 +1,7 @@
 package com.galaxysoft.photogallery.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class LoggerPostProcessor implements BeanPostProcessor {
         ReflectionUtils.doWithFields(bean.getClass(), field -> {
             if (field.getAnnotation(Log.class) != null) {
                 ReflectionUtils.makeAccessible(field);
-                Logger log = LogManager.getLogger(bean.getClass());
+                Logger log = LoggerFactory.getLogger(bean.getClass());
                 field.set(bean, log);
             }
         });

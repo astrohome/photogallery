@@ -2,9 +2,10 @@ package com.galaxysoft.photogallery.web.controllers;
 
 import com.galaxysoft.photogallery.api.service.GalleryService;
 import com.galaxysoft.photogallery.utils.Log;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,9 +33,9 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Map<String, Object> model) {
-        constructPublicMenu(model);
-        model.put("galleries", galleryService.searchGalleries());
+    public String index(Model model) {
+        //constructPublicMenu(model);
+        model.addAttribute("galleries", galleryService.searchGalleries());
         return "index";
     }
 

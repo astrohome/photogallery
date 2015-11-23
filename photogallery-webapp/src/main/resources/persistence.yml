@@ -1,0 +1,14 @@
+################### JDBC Configuration ##########################
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/photogallery
+  username: photogallery
+  password: photogallery
+
+################### Hibernate Configuration ##########################
+hibernate:
+  dialect: org.hibernate.dialect.MySQLDialect
+  show_sql: true
+  hbm2ddl:
+    auto: update
+  generate_statistics: true

@@ -20,10 +20,8 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {
-        "com.galaxysoft.photogallery.api.dao"
-})
-public class RepositoryConfig {
+@EnableJpaRepositories(basePackages = "com.galaxysoft.photogallery.api.dao")
+class RepositoryConfig {
 
     @Value("${jdbc.driverClassName}")
     private String driverClassName;

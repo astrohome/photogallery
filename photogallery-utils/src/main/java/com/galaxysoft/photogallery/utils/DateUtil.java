@@ -14,13 +14,12 @@ public class DateUtil {
     static final DateFormatSymbols RU_SYMBOLS = new DateFormatSymbols(RU_LOCALE);
     static final String[] RU_MONTHS = {"января", "февраля", "марта", "апреля", "мая",
             "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+    public static SimpleDateFormat formatterId = new SimpleDateFormat("dd-MM-yyyy");
+    public static SimpleDateFormat formatterText = new SimpleDateFormat("dd MMMM yyyy", RU_SYMBOLS);
 
     static {
         RU_SYMBOLS.setMonths(RU_MONTHS);
     }
-
-    public static SimpleDateFormat formatterId = new SimpleDateFormat("dd-MM-yyyy");
-    public static SimpleDateFormat formatterText = new SimpleDateFormat("dd MMMM yyyy", RU_SYMBOLS);
 
     /**
      * Converts Date to String.
