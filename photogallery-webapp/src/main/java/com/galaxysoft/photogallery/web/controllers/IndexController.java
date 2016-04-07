@@ -1,6 +1,6 @@
 package com.galaxysoft.photogallery.web.controllers;
 
-import com.galaxysoft.photogallery.api.service.GalleryService;
+import com.galaxysoft.photogallery.api.service.IGalleryService;
 import com.galaxysoft.photogallery.utils.Log;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class IndexController {
 
     @Autowired
-    private GalleryService galleryService;
+    private IGalleryService IGalleryService;
 
     @Log
     private Logger logger;
@@ -35,7 +35,7 @@ public class IndexController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
         //constructPublicMenu(model);
-        model.addAttribute("galleries", galleryService.searchGalleries());
+        model.addAttribute("galleries", IGalleryService.searchGalleries());
         return "index";
     }
 

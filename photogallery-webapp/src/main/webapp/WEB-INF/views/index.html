@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:cosmos="http://www.astrohome.eu/cosmos"
+      cosmos:layout="global/layout">
+<head>
+    <title>test test - test</title>
+</head>
+<body>
+<div cosmos:fragment="content">
+    <ul>
+        <li th:each="path : ${galleries}" th:text="${path}">En las Orillas del Sar</li>
+    </ul>
+</div>
+
+</body>
+</html>

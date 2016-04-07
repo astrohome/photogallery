@@ -1,6 +1,7 @@
 package com.galaxysoft.photogallery.web.config;
 
 
+import com.galaxysoft.photogallery.web.test.MyDialect;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -14,11 +15,14 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import javax.servlet.ServletContext;
+import java.util.HashSet;
+import java.util.Set;
 
 @PropertySources({
         @PropertySource("classpath:application.yml")
@@ -30,7 +34,7 @@ import javax.servlet.ServletContext;
 class WebMvcConfig extends WebMvcConfigurationSupport {
 
     private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";
-    private static final String VIEWS = "/WEB-INF/templates/";
+    private static final String VIEWS = "/WEB-INF/views/";
 
     private static final String RESOURCES_LOCATION = "/resources/";
     private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";
@@ -79,8 +83,12 @@ class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Bean
     public SpringTemplateEngine templateEngine(ServletContextTemplateResolver templateResolver) {
+        Set<IDialect> dialects = new HashSet<>();
+        dialects.add(new MyDialect());
+
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(templateResolver);
+        engine.setAdditionalDialects(dialects);
 //        engine.addDialect(new SpringSecurityDialect());
         return engine;
     }

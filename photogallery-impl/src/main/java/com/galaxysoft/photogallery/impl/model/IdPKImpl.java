@@ -4,10 +4,12 @@ import com.galaxysoft.photogallery.api.model.Format;
 import com.galaxysoft.photogallery.api.model.IdPK;
 import com.galaxysoft.photogallery.api.model.PaperType;
 
+import javax.persistence.Embeddable;
+
 /**
  * Created by Illia IZOTOV on 20/08/15.
  */
-public class IdPKImpl implements IdPK {
+public class IdPKImpl extends IdPK {
 
     private Format format;
 
@@ -18,7 +20,6 @@ public class IdPKImpl implements IdPK {
         this.paperType = paperType;
     }
 
-    @Override
     public boolean equals(Object obj) {
         //check for self-comparison
         if (this == obj) return true;
@@ -40,7 +41,6 @@ public class IdPKImpl implements IdPK {
                 this.paperType.getId().equals(that.paperType.getId());
     }
 
-    @Override
     public int hashCode() {
         return 37 * (this.getFormat().hashCode() + this.getPaperType().hashCode()) + 5;
     }

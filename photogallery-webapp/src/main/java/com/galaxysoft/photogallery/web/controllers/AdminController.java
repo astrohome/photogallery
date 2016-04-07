@@ -1,7 +1,7 @@
 package com.galaxysoft.photogallery.web.controllers;
 
 import com.galaxysoft.photogallery.api.service.FormatService;
-import com.galaxysoft.photogallery.api.service.GalleryService;
+import com.galaxysoft.photogallery.api.service.IGalleryService;
 import com.galaxysoft.photogallery.utils.FileUtils;
 import com.galaxysoft.photogallery.utils.Log;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class AdminController {
     private FileUtils fileService;
 
     @Autowired
-    private GalleryService galleryService;
+    private IGalleryService IGalleryService;
 
 //    @Autowired
 //    private ImageService imageService;
@@ -113,14 +113,14 @@ public class AdminController {
 //    public ModelAndView adminEditGallery(@RequestParam("title") String title) throws IOException {
 //        String realTitle = URLDecoder.decode(title, "UTF-8");
 //        ModelAndView modelAndView = new ModelAndView("admin/edit_gallery");
-//        modelAndView.addObject("gallery", galleryService.getByTitleFromDBorFileSystem(realTitle));
+//        modelAndView.addObject("gallery", IGalleryService.getByTitleFromDBorFileSystem(realTitle));
 //        return modelAndView;
 //    }
 //
 //    @RequestMapping(value = "/saveGallery", method = RequestMethod.POST)
 //    @Secured({"ROLE_ADMIN"})
 //    public String adminPost(@ModelAttribute("gallery") Gallery gallery) throws IOException {
-//        final Gallery updatedGallery = galleryService.updateItem(gallery);
+//        final Gallery updatedGallery = IGalleryService.updateItem(gallery);
 //        Runnable r = new Runnable() {
 //            @Override
 //            public void run() {
@@ -135,7 +135,7 @@ public class AdminController {
 //    @RequestMapping(value = "/deleteGallery", method = RequestMethod.GET, headers = "Accept=application/json")
 //    @Secured({"ROLE_ADMIN"})
 //    public ModelAndView adminDeleteGallery(@RequestParam("id") Integer id) {
-//        galleryService.deleteItem(Integer.valueOf(id));
+//        IGalleryService.deleteItem(Integer.valueOf(id));
 //        ModelAndView modelAndView = new ModelAndView("redirect:/admin?page=gal");
 //        modelAndView.addObject("listDirectories", fileService.getDirectories());
 //        modelAndView.addObject("success", true);

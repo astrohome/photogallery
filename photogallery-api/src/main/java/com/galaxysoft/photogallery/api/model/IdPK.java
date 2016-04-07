@@ -8,14 +8,20 @@ import java.io.Serializable;
  * Created by Illia IZOTOV on 20/08/15.
  */
 @Embeddable
-public interface IdPK extends Serializable {
+public abstract class IdPK implements Serializable {
     @ManyToOne(optional = false)
-    Format getFormat();
+    public abstract Format getFormat();
 
-    void setFormat(Format format);
+    public abstract void setFormat(Format format);
 
     @ManyToOne(optional = false)
-    PaperType getPaperType();
+    public abstract PaperType getPaperType();
 
-    void setPaperType(PaperType paperType);
+    public abstract void setPaperType(PaperType paperType);
+
+    @Override
+    public abstract boolean equals(Object obj);
+
+    @Override
+    public abstract int hashCode();
 }
